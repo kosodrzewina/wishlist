@@ -13,11 +13,11 @@ import com.example.wishlist.Product
 
 @OptIn(ExperimentalMaterialApi::class)
 @Composable
-fun ProductListItem(product: Product) {
+fun ProductListItem(product: Product, onClick: () -> Unit) {
     Card(
         shape = RoundedCornerShape(16.dp),
         elevation = 8.dp,
-        onClick = {},
+        onClick = onClick,
         modifier = Modifier.fillMaxWidth()
     ) {
         Text(text = product.name, modifier = Modifier.padding(all = 16.dp))

@@ -4,11 +4,12 @@ import androidx.compose.material.*
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.CameraAlt
 import androidx.compose.runtime.Composable
+import androidx.navigation.NavController
 import com.example.wishlist.Product
 import com.example.wishlist.composables.ProductList
 
 @Composable
-fun HomeScreen(products: List<Product>) {
+fun HomeScreen(products: List<Product>, navController: NavController) {
     Scaffold(
         topBar = {
             TopAppBar(
@@ -23,6 +24,6 @@ fun HomeScreen(products: List<Product>) {
             )
         }
     ) {
-        ProductList(products = products)
+        ProductList(products = products, navController = navController)
     }
 }

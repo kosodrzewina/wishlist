@@ -7,10 +7,14 @@ import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.material.MaterialTheme
 import androidx.compose.material.Surface
 import androidx.compose.ui.Modifier
-import com.example.wishlist.screens.ProductDetailScreen
+import androidx.navigation.NavHostController
+import androidx.navigation.compose.rememberNavController
+import com.example.wishlist.navigation.NavGraph
 import com.example.wishlist.ui.theme.WishlistTheme
 
 class MainActivity : ComponentActivity() {
+    private lateinit var navHostController: NavHostController
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContent {
@@ -20,8 +24,9 @@ class MainActivity : ComponentActivity() {
                     modifier = Modifier.fillMaxSize(),
                     color = MaterialTheme.colors.background
                 ) {
-//                    HomeScreen(ProductStore.products)
-                    ProductDetailScreen(ProductStore.products[0])
+                    navHostController = rememberNavController()
+
+                    NavGraph(navHostController = navHostController)
                 }
             }
         }

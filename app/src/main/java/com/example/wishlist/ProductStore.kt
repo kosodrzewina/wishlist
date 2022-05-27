@@ -9,16 +9,19 @@ object ProductStore {
         products.addAll(
             listOf(
                 Product(
+                    id = 0,
                     name = "Product name",
                     address = "address",
                     photo = 1
                 ),
                 Product(
+                    id = 1,
                     name = "Second product",
                     address = "address",
                     photo = 1
                 ),
                 Product(
+                    id = 2,
                     name = "Third product",
                     address = "address",
                     photo = 1

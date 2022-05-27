@@ -2,23 +2,27 @@ package com.example.wishlist.screens
 
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.padding
-import androidx.compose.material.Icon
-import androidx.compose.material.Scaffold
-import androidx.compose.material.Text
-import androidx.compose.material.TopAppBar
+import androidx.compose.material.*
 import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.filled.ArrowBack
 import androidx.compose.material.icons.filled.LocationOn
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
+import androidx.navigation.NavController
 import com.example.wishlist.Product
 
 @Composable
-fun ProductDetailScreen(product: Product) {
+fun ProductDetailScreen(product: Product, navController: NavController) {
     Scaffold(
         topBar = {
             TopAppBar(
-                title = { Text(text = product.name) }
+                title = { Text(text = product.name) },
+                navigationIcon = {
+                    IconButton(onClick = { navController.popBackStack() }) {
+                        Icon(imageVector = Icons.Default.ArrowBack, contentDescription = null)
+                    }
+                }
             )
         }
     ) {
