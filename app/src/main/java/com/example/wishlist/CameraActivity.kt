@@ -9,9 +9,11 @@ import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.compose.foundation.Image
+import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.runtime.mutableStateOf
-import androidx.compose.ui.platform.LocalContext
+import androidx.compose.ui.Modifier
 import androidx.core.content.ContextCompat
+import coil.compose.rememberImagePainter
 import com.example.wishlist.composables.CameraView
 import com.example.wishlist.ui.theme.WishlistTheme
 import java.io.File
@@ -47,9 +49,13 @@ class CameraActivity : ComponentActivity() {
                         onError = {}
                     )
                 }
-                
+
                 if (shouldShowPhoto.value) {
-//                    Image(painter = , contentDescription = )
+                    Image(
+                        painter = rememberImagePainter(photoUri),
+                        contentDescription = null,
+                        modifier = Modifier.fillMaxSize()
+                    )
                 }
             }
         }
