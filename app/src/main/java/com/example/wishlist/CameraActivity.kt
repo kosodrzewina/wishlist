@@ -9,9 +9,15 @@ import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.compose.foundation.Image
-import androidx.compose.foundation.layout.fillMaxSize
+import androidx.compose.foundation.layout.*
+import androidx.compose.foundation.shape.RoundedCornerShape
+import androidx.compose.material.Button
+import androidx.compose.material.Card
+import androidx.compose.material.Text
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.layout.ContentScale
+import androidx.compose.ui.unit.dp
 import androidx.core.content.ContextCompat
 import coil.compose.rememberImagePainter
 import com.example.wishlist.composables.CameraView
@@ -51,11 +57,40 @@ class CameraActivity : ComponentActivity() {
                 }
 
                 if (shouldShowPhoto.value) {
-                    Image(
-                        painter = rememberImagePainter(photoUri),
-                        contentDescription = null,
-                        modifier = Modifier.fillMaxSize()
-                    )
+                    Column {
+                        Card(
+                            shape = RoundedCornerShape(16.dp),
+                            elevation = 8.dp,
+                            modifier = Modifier.padding(all = 16.dp)
+                        ) {
+                            Image(
+                                painter = rememberImagePainter(photoUri),
+                                contentDescription = null,
+                                modifier = Modifier.fillMaxWidth(),
+                                contentScale = ContentScale.Crop
+                            )
+                        }
+                        Row(
+                            horizontalArrangement = Arrangement.Center,
+                            modifier = Modifier.fillMaxWidth()
+                        ) {
+                            Button(
+                                onClick = {
+                                    shouldShowPhoto.value = false
+                                    shouldShowCamera.value = true
+                                },
+                                modifier = Modifier.padding(all = 16.dp)
+                            ) {
+                                Text(text = "Decline")
+                            }
+                            Button(
+                                onClick = { /*TODO*/ },
+                                modifier = Modifier.padding(all = 16.dp)
+                            ) {
+                                Text(text = "Accept")
+                            }
+                        }
+                    }
                 }
             }
         }
