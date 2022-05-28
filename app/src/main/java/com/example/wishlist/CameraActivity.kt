@@ -84,7 +84,9 @@ class CameraActivity : ComponentActivity() {
                                 Text(text = "Decline")
                             }
                             Button(
-                                onClick = { /*TODO*/ },
+                                onClick = {
+                                    val newProduct = Product(photoUri.toString(), "", "")
+                                },
                                 modifier = Modifier.padding(all = 16.dp)
                             ) {
                                 Text(text = "Accept")

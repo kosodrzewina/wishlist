@@ -19,7 +19,7 @@ fun ProductList(products: List<Product>, navController: NavController) {
         items(items = products) {
             ProductListItem(product = it, onClick = {
                 navController.navigate(
-                    route = Screen.ProductDetailScreen.routeWithArgs(it.id.toString())
+                    route = Screen.ProductDetailScreen.routeWithArgs(it.productIdImagePath)
                 )
             })
         }

@@ -7,6 +7,7 @@ import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.navArgument
 import com.example.wishlist.ProductStore
+import com.example.wishlist.screens.CreateOrEditProductScreen
 import com.example.wishlist.screens.HomeScreen
 import com.example.wishlist.screens.ProductDetailScreen
 
@@ -21,14 +22,31 @@ fun NavGraph(navHostController: NavHostController) {
             route = Screen.ProductDetailScreen.route + "/{productId}",
             arguments = listOf(
                 navArgument("productId") {
-                    type = NavType.IntType
+                    type = NavType.StringType
                     nullable = false
                 }
             )
         ) { entry ->
             ProductDetailScreen(
                 product = ProductStore.products.first { product ->
-                    product.id == entry.arguments?.getInt("productId")
+                    product.productIdImagePath == entry.arguments?.getString("productId")
+                },
+                navController = navHostController
+            )
+        }
+
+        composable(
+            route = Screen.CreateOrEditProductScreen.route + "/{productId}",
+            arguments = listOf(
+                navArgument("productId") {
+                    type = NavType.StringType
+                    nullable = false
+                }
+            )
+        ) { entry ->
+            CreateOrEditProductScreen(
+                product = ProductStore.products.first { product ->
+                    product.productIdImagePath == entry.arguments?.getString("productId")
                 },
                 navController = navHostController
             )
