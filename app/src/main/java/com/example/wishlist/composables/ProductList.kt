@@ -9,6 +9,8 @@ import androidx.compose.ui.unit.dp
 import androidx.navigation.NavController
 import com.example.wishlist.Product
 import com.example.wishlist.navigation.Screen
+import java.net.URLEncoder
+import java.nio.charset.StandardCharsets
 
 @Composable
 fun ProductList(products: List<Product>, navController: NavController) {
@@ -19,7 +21,9 @@ fun ProductList(products: List<Product>, navController: NavController) {
         items(items = products) {
             ProductListItem(product = it, onClick = {
                 navController.navigate(
-                    route = Screen.ProductDetailScreen.routeWithArgs(it.productIdImagePath)
+                    route = Screen.ProductDetailScreen.routeWithArgs(
+                        URLEncoder.encode(it.productIdImagePath, StandardCharsets.UTF_8.toString())
+                    )
                 )
             })
         }
