@@ -6,6 +6,7 @@ import androidx.navigation.NavType
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.navArgument
+import com.example.wishlist.Product
 import com.example.wishlist.ProductStore
 import com.example.wishlist.screens.HomeScreen
 import com.example.wishlist.screens.ProductDetailScreen
@@ -32,11 +33,16 @@ fun NavGraph(navHostController: NavHostController) {
                 entry.arguments?.getString("encodedProductId"),
                 StandardCharsets.UTF_8.toString()
             )
+            val product: Product = try {
+                ProductStore.products.first {
+                    it.productIdImagePath == decodedProductId
+                }
+            } catch (e: NoSuchElementException) {
+                Product("", "", "")
+            }
 
             ProductDetailScreen(
-                product = ProductStore.products.first { product ->
-                    product.productIdImagePath == decodedProductId
-                },
+                product = product,
                 navController = navHostController
             )
         }

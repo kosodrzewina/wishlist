@@ -9,6 +9,7 @@ import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.*
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.ArrowBack
+import androidx.compose.material.icons.filled.Delete
 import androidx.compose.material.icons.filled.Edit
 import androidx.compose.material.icons.filled.LocationOn
 import androidx.compose.runtime.*
@@ -19,6 +20,7 @@ import androidx.navigation.NavController
 import coil.compose.rememberImagePainter
 import com.example.wishlist.MapViewModel
 import com.example.wishlist.Product
+import com.example.wishlist.ProductStore
 
 @Composable
 fun ProductDetailScreen(product: Product, navController: NavController) {
@@ -36,6 +38,14 @@ fun ProductDetailScreen(product: Product, navController: NavController) {
                     navigationIcon = {
                         IconButton(onClick = { navController.popBackStack() }) {
                             Icon(imageVector = Icons.Default.ArrowBack, contentDescription = null)
+                        }
+                    },
+                    actions = {
+                        IconButton(onClick = {
+                            ProductStore.products.remove(product)
+                            navController.popBackStack()
+                        }) {
+                            Icon(imageVector = Icons.Default.Delete, contentDescription = null)
                         }
                     }
                 )
