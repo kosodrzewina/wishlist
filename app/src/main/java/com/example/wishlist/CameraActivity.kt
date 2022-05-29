@@ -87,16 +87,6 @@ class CameraActivity : ComponentActivity() {
         }
     }
 
-//    private fun requestLocationPermission() {
-//        if (PackageManager.PERMISSION_GRANTED != ContextCompat.checkSelfPermission(
-//                this,
-//                Manifest.permission.ACCESS_FINE_LOCATION
-//            )
-//        ) {
-//            requestPermissionLauncher.launch(Manifest.permission.ACCESS_FINE_LOCATION)
-//        }
-//    }
-
     private fun handleImageCapture(uri: Uri) {
         isCamer.value = false
         photoUri = uri
@@ -191,23 +181,6 @@ class CameraActivity : ComponentActivity() {
                     }
                     Button(
                         onClick = {
-//                        requestLocationPermission()
-//
-//                        if (
-//                            PackageManager.PERMISSION_GRANTED == ContextCompat.checkSelfPermission(
-//                                context,
-//                                Manifest.permission.ACCESS_FINE_LOCATION
-//                            )
-//                        ) {
-//                            fusedLocationClient
-//                                .lastLocation
-//                                .addOnSuccessListener { lastLocation: Location? ->
-//                                    if (lastLocation != null) {
-//                                        location = lastLocation
-//                                    }
-//                                }
-//                        }
-
                             newProduct.apply {
                                 productIdImagePath = photoUri.toString()
                                 name = nameValue
