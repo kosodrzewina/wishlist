@@ -1,4 +1,4 @@
-package com.example.wishlist.composables
+package com.example.wishlist.screens
 
 import android.content.Intent
 import androidx.compose.foundation.layout.*

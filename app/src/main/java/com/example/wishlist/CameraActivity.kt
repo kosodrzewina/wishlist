@@ -21,7 +21,7 @@ import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.unit.dp
 import androidx.core.content.ContextCompat
 import coil.compose.rememberImagePainter
-import com.example.wishlist.composables.AddressPicker
+import com.example.wishlist.screens.AddressPicker
 import com.example.wishlist.composables.CameraView
 import com.example.wishlist.ui.theme.WishlistTheme
 import com.google.android.gms.location.FusedLocationProviderClient
@@ -36,13 +36,13 @@ class CameraActivity : ComponentActivity() {
     private lateinit var photoUri: Uri
     private lateinit var fusedLocationClient: FusedLocationProviderClient
 
-    private var isCamer = mutableStateOf(false)
+    private var isCamera = mutableStateOf(false)
     private var isPhoto = mutableStateOf(false)
 
     private val requestPermissionLauncher =
         registerForActivityResult(ActivityResultContracts.RequestPermission()) {
             if (it) {
-                isCamer.value = true
+                isCamera.value = true
             } else {
                 this.startActivity(Intent(this, MainActivity::class.java))
             }
@@ -54,7 +54,7 @@ class CameraActivity : ComponentActivity() {
 
         setContent {
             WishlistTheme {
-                if (isCamer.value) {
+                if (isCamera.value) {
                     CameraView(
                         outputDirectory = outputDirectory,
                         executor = cameraExecutor,
@@ -81,14 +81,14 @@ class CameraActivity : ComponentActivity() {
                 Manifest.permission.CAMERA
             )
         ) {
-            isCamer.value = true
+            isCamera.value = true
         } else {
             requestPermissionLauncher.launch(Manifest.permission.CAMERA)
         }
     }
 
     private fun handleImageCapture(uri: Uri) {
-        isCamer.value = false
+        isCamera.value = false
         photoUri = uri
         isPhoto.value = true
     }
@@ -173,7 +173,7 @@ class CameraActivity : ComponentActivity() {
                     Button(
                         onClick = {
                             isPhoto.value = false
-                            isCamer.value = true
+                            isCamera.value = true
                         },
                         modifier = Modifier.padding(all = 16.dp)
                     ) {
