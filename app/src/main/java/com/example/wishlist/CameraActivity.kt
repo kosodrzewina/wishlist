@@ -192,6 +192,7 @@ class CameraActivity : ComponentActivity() {
                             productViewModel.addProduct(newProduct)
                             isAddressPicker = true
                         },
+                        enabled = nameValue.isNotEmpty(),
                         modifier = Modifier.padding(all = 16.dp)
                     ) {
                         Text(text = "Accept")
