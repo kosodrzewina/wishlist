@@ -20,7 +20,6 @@ import androidx.navigation.NavController
 import coil.compose.rememberImagePainter
 import com.example.wishlist.MapViewModel
 import com.example.wishlist.Product
-import com.example.wishlist.ProductStore
 import com.example.wishlist.composables.AddressPicker
 import com.example.wishlist.database.ProductViewModel
 
@@ -48,7 +47,7 @@ fun ProductDetailScreen(
                     },
                     actions = {
                         IconButton(onClick = {
-                            ProductStore.products.remove(product)
+                            productViewModel.deleteProduct(product)
                             navController.popBackStack()
                         }) {
                             Icon(imageVector = Icons.Default.Delete, contentDescription = null)
