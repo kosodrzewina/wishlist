@@ -16,13 +16,14 @@ import androidx.compose.ui.viewinterop.AndroidView
 import com.example.wishlist.MainActivity
 import com.example.wishlist.MapViewModel
 import com.example.wishlist.Product
+import com.example.wishlist.database.ProductViewModel
 import com.example.wishlist.rememberMapViewWithLifecycle
 import com.google.android.gms.maps.CameraUpdateFactory
 import com.google.android.gms.maps.MapView
 import com.google.android.gms.maps.model.LatLng
 
 @Composable
-fun AddressPicker(viewModel: MapViewModel, product: Product) {
+fun AddressPicker(viewModel: MapViewModel, product: Product, productViewModel: ProductViewModel) {
     Surface(color = MaterialTheme.colors.background) {
         val mapView = rememberMapViewWithLifecycle()
         val currentLocation = viewModel.location.collectAsState()
@@ -51,7 +52,7 @@ fun AddressPicker(viewModel: MapViewModel, product: Product) {
                 Button(
                     shape = RoundedCornerShape(100.dp),
                     onClick = {
-                        product.address = address
+                        productViewModel.updateProductAddress(product.productIdImagePath, address)
                         context.startActivity(Intent(context, MainActivity::class.java))
                     },
                     modifier = Modifier.padding(all = 16.dp)

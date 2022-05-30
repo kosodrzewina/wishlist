@@ -6,7 +6,6 @@ import androidx.activity.compose.setContent
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.NavHostController
 import androidx.navigation.compose.rememberNavController
-import com.example.wishlist.database.Graph
 import com.example.wishlist.database.ProductViewModel
 import com.example.wishlist.navigation.NavGraph
 import com.example.wishlist.ui.theme.WishlistTheme
@@ -16,14 +15,12 @@ import kotlinx.coroutines.launch
 
 class MainActivity : ComponentActivity() {
     private lateinit var navHostController: NavHostController
+    private lateinit var productViewModel: ProductViewModel
 
     @OptIn(DelicateCoroutinesApi::class)
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        Graph.provide(this)
-
-        val productViewModel: ProductViewModel =
-            ViewModelProvider(this)[ProductViewModel::class.java]
+        productViewModel = ViewModelProvider(this)[ProductViewModel::class.java]
 
         GlobalScope.launch {
             productViewModel.selectAllProducts().collect { products ->
@@ -40,7 +37,7 @@ class MainActivity : ComponentActivity() {
         setContent {
             WishlistTheme {
                 navHostController = rememberNavController()
-                NavGraph(navHostController = navHostController)
+                NavGraph(navHostController = navHostController, productViewModel)
             }
         }
     }

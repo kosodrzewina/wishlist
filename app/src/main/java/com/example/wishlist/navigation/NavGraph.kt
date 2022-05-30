@@ -8,13 +8,14 @@ import androidx.navigation.compose.composable
 import androidx.navigation.navArgument
 import com.example.wishlist.Product
 import com.example.wishlist.ProductStore
+import com.example.wishlist.database.ProductViewModel
 import com.example.wishlist.screens.HomeScreen
 import com.example.wishlist.screens.ProductDetailScreen
 import java.net.URLDecoder
 import java.nio.charset.StandardCharsets
 
 @Composable
-fun NavGraph(navHostController: NavHostController) {
+fun NavGraph(navHostController: NavHostController, productViewModel: ProductViewModel) {
     NavHost(navController = navHostController, startDestination = Screen.HomeScreen.route) {
         composable(route = Screen.HomeScreen.route) {
             HomeScreen(products = ProductStore.products, navController = navHostController)
@@ -43,7 +44,8 @@ fun NavGraph(navHostController: NavHostController) {
 
             ProductDetailScreen(
                 product = product,
-                navController = navHostController
+                navController = navHostController,
+                productViewModel
             )
         }
     }

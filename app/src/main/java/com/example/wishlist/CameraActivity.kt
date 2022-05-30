@@ -125,7 +125,7 @@ class CameraActivity : ComponentActivity() {
         }
 
         if (isAddressPicker) {
-            AddressPicker(mapViewModel, newProduct)
+            AddressPicker(mapViewModel, newProduct, productViewModel)
         } else {
             Column {
                 Card(

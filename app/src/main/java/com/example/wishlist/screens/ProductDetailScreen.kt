@@ -22,15 +22,20 @@ import com.example.wishlist.MapViewModel
 import com.example.wishlist.Product
 import com.example.wishlist.ProductStore
 import com.example.wishlist.composables.AddressPicker
+import com.example.wishlist.database.ProductViewModel
 
 @Composable
-fun ProductDetailScreen(product: Product, navController: NavController) {
+fun ProductDetailScreen(
+    product: Product,
+    navController: NavController,
+    productViewModel: ProductViewModel
+) {
     var isAddressPicker by remember {
         mutableStateOf(false)
     }
 
     if (isAddressPicker) {
-        AddressPicker(viewModel = MapViewModel(), product = product)
+        AddressPicker(viewModel = MapViewModel(), product = product, productViewModel)
     } else {
         Scaffold(
             topBar = {
