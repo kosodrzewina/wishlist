@@ -1,11 +1,11 @@
 package com.example.wishlist.database
 
-import androidx.lifecycle.LiveData
 import com.example.wishlist.Product
 import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.flow.Flow
 
 class ProductRepository(private val productDao: ProductDao) {
-    val selectAll: LiveData<List<Product>> = productDao.selectAll()
+    val selectAll: Flow<List<Product>> = productDao.selectAll()
 
     suspend fun insertProduct(product: Product) {
         Dispatchers.IO.apply {

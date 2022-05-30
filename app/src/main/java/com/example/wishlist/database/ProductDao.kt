@@ -1,16 +1,16 @@
 package com.example.wishlist.database
 
-import androidx.lifecycle.LiveData
 import androidx.room.Dao
 import androidx.room.Insert
 import androidx.room.OnConflictStrategy
 import androidx.room.Query
 import com.example.wishlist.Product
+import kotlinx.coroutines.flow.Flow
 
 @Dao
 interface ProductDao {
     @Query("SELECT * FROM product")
-    fun selectAll(): LiveData<List<Product>>
+    fun selectAll(): Flow<List<Product>>
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     suspend fun insert(product: Product)

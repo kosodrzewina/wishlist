@@ -21,6 +21,7 @@ import coil.compose.rememberImagePainter
 import com.example.wishlist.MapViewModel
 import com.example.wishlist.Product
 import com.example.wishlist.ProductStore
+import com.example.wishlist.composables.AddressPicker
 
 @Composable
 fun ProductDetailScreen(product: Product, navController: NavController) {

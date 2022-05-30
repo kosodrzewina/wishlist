@@ -2,15 +2,15 @@ package com.example.wishlist.database
 
 import android.app.Application
 import androidx.lifecycle.AndroidViewModel
-import androidx.lifecycle.LiveData
 import androidx.lifecycle.viewModelScope
 import com.example.wishlist.Product
+import com.example.wishlist.ProductStore
 import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.launch
-import kotlinx.coroutines.withContext
 
 class ProductViewModel(application: Application) : AndroidViewModel(application) {
-    private val selectAll: LiveData<List<Product>>
+    private val selectAll: Flow<List<Product>>
     private val repository: ProductRepository
 
     init {
@@ -19,30 +19,27 @@ class ProductViewModel(application: Application) : AndroidViewModel(application)
         selectAll = repository.selectAll
     }
 
-    fun selectAllProducts(): List<Product>? {
-        return repository.selectAll.value
-//        var products: List<Product>?
-//
-//        withContext(viewModelScope.coroutineContext + Dispatchers.IO) {
-//            products = repository.selectAll.value
-//        }
-//
-//        return products
+    fun selectAllProducts(): Flow<List<Product>> {
+        return repository.selectAll
     }
 
     fun addProduct(product: Product) {
+        ProductStore.products.add(product)
         viewModelScope.launch(Dispatchers.IO) {
             repository.insertProduct(product = product)
         }
     }
 
     fun updateProductAddress(productIdImagePath: String, address: String) {
+        ProductStore.products.first { it.productIdImagePath == productIdImagePath }.address =
+            address
         viewModelScope.launch(Dispatchers.IO) {
             repository.updateProductAddress(productIdImagePath, address)
         }
     }
 
-    fun deleteSample(product: Product) {
+    fun deleteProduct(product: Product) {
+        ProductStore.products.remove(product)
         viewModelScope.launch(Dispatchers.IO) {
             repository.deleteProduct(product = product)
         }
