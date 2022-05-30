@@ -1,3 +1,12 @@
 package com.example.wishlist
 
-data class Product(var productIdImagePath: String, var name: String, var address: String)
+import androidx.room.Entity
+import androidx.room.PrimaryKey
+
+@Entity
+data class Product(
+    @PrimaryKey
+    var productIdImagePath: String,
+    var name: String,
+    var address: String
+)

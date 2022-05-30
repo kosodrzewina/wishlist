@@ -6,24 +6,34 @@ object ProductStore {
     val products = mutableStateListOf<Product>()
 
     init {
-        products.addAll(
-            listOf(
-                Product(
-                    productIdImagePath = "0",
-                    name = "Product name",
-                    address = "address",
-                ),
-                Product(
-                    productIdImagePath = "1",
-                    name = "Second product",
-                    address = "address",
-                ),
-                Product(
-                    productIdImagePath = "2",
-                    name = "Third product",
-                    address = "address",
-                )
-            )
-        )
+//        products.addAll(
+//            listOf(
+//                Product(
+//                    productIdImagePath = "0",
+//                    name = "Product name",
+//                    address = "address",
+//                ),
+//                Product(
+//                    productIdImagePath = "1",
+//                    name = "Second product",
+//                    address = "address",
+//                ),
+//                Product(
+//                    productIdImagePath = "2",
+//                    name = "Third product",
+//                    address = "address",
+//                )
+//            )
+//        )
+    }
+
+    fun addProduct(product: Product) {
+        products.add(product)
+        // save to db
+    }
+
+    fun removeProduct(product: Product) {
+        products.remove(product)
+        // remove from db
     }
 }
