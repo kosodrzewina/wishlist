@@ -39,7 +39,7 @@ fun NavGraph(navHostController: NavHostController, productViewModel: ProductView
                     it.productIdImagePath == decodedProductId
                 }
             } catch (e: NoSuchElementException) {
-                Product("", "", "")
+                Product("", "", "", 0.0, 0.0)
             }
 
             ProductDetailScreen(

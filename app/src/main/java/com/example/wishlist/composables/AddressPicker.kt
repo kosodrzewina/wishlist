@@ -52,7 +52,12 @@ fun AddressPicker(viewModel: MapViewModel, product: Product, productViewModel: P
                 Button(
                     shape = RoundedCornerShape(100.dp),
                     onClick = {
-                        productViewModel.updateProductAddress(product.productIdImagePath, address)
+                        productViewModel.updateProductLocation(
+                            product.productIdImagePath,
+                            address,
+                            viewModel.location.value.latitude,
+                            viewModel.location.value.longitude
+                        )
                         context.startActivity(Intent(context, MainActivity::class.java))
                     },
                     modifier = Modifier.padding(all = 16.dp)

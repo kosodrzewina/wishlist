@@ -30,11 +30,21 @@ class ProductViewModel(application: Application) : AndroidViewModel(application)
         }
     }
 
-    fun updateProductAddress(productIdImagePath: String, address: String) {
-        ProductStore.products.first { it.productIdImagePath == productIdImagePath }.address =
-            address
+    fun updateProductLocation(
+        productIdImagePath: String,
+        address: String,
+        latitude: Double,
+        longitude: Double
+    ) {
+        val product = ProductStore.products.first { it.productIdImagePath == productIdImagePath }
+
+        product.apply {
+            this.address = address
+            this.latitude = latitude
+            this.longitude = longitude
+        }
         viewModelScope.launch(Dispatchers.IO) {
-            repository.updateProductAddress(productIdImagePath, address)
+            repository.updateProductLocation(productIdImagePath, address, latitude, longitude)
         }
     }
 
@@ -45,16 +55,3 @@ class ProductViewModel(application: Application) : AndroidViewModel(application)
         }
     }
 }
-
-//class ProductViewModelFactory(
-//    private val application: Application
-//) : ViewModelProvider.Factory {
-//    override fun <T : ViewModel> create(modelClass: Class<T>): T {
-//        @Suppress("UNCHECKED_CAST")
-//        if (modelClass.isAssignableFrom(ProductViewModel::class.java)) {
-//            return ProductViewModel(application) as T
-//        }
-//
-//        throw IllegalArgumentException()
-//    }
-//}

@@ -115,7 +115,7 @@ class CameraActivity : ComponentActivity() {
         val mapViewModel: MapViewModel by viewModels()
 
         val newProduct by remember {
-            mutableStateOf(Product("", "", ""))
+            mutableStateOf(Product("", "", "", 0.0, 0.0))
         }
         var nameValue by remember {
             mutableStateOf("")

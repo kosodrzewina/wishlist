@@ -24,4 +24,15 @@ class ProductRepository(private val productDao: ProductDao) {
             productDao.updateProductAddress(productIdImagePath, address)
         }
     }
+
+    suspend fun updateProductLocation(
+        productIdImagePath: String,
+        address: String,
+        latitude: Double,
+        longitude: Double
+    ) {
+        Dispatchers.IO.apply {
+            productDao.updateProductLocation(productIdImagePath, address, latitude, longitude)
+        }
+    }
 }

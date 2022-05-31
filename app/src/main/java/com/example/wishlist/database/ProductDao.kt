@@ -20,4 +20,18 @@ interface ProductDao {
 
     @Query("UPDATE product SET address = :address WHERE productIdImagePath = :productIdImagePath")
     suspend fun updateProductAddress(productIdImagePath: String, address: String)
+
+    @Query(
+        """
+       UPDATE product
+       SET address = :address, latitude = :latitude, longitude = :longitude 
+       WHERE productIdImagePath = :productIdImagePath 
+    """
+    )
+    suspend fun updateProductLocation(
+        productIdImagePath: String,
+        address: String,
+        latitude: Double,
+        longitude: Double
+    )
 }
