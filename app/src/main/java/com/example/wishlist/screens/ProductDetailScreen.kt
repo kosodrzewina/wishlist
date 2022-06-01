@@ -1,10 +1,7 @@
 package com.example.wishlist.screens
 
 import androidx.compose.foundation.Image
-import androidx.compose.foundation.layout.Column
-import androidx.compose.foundation.layout.Row
-import androidx.compose.foundation.layout.fillMaxWidth
-import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.*
 import androidx.compose.material.icons.Icons
@@ -60,7 +57,10 @@ fun ProductDetailScreen(
                 Card(
                     shape = RoundedCornerShape(16.dp),
                     elevation = 8.dp,
-                    modifier = Modifier.padding(all = 16.dp)
+                    modifier = Modifier
+                        .padding(all = 16.dp)
+                        .aspectRatio(1f)
+
                 ) {
                     Image(
                         painter = rememberImagePainter(product.productIdImagePath),

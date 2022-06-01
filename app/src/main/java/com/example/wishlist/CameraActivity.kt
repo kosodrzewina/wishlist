@@ -26,8 +26,6 @@ import com.example.wishlist.composables.AddressPicker
 import com.example.wishlist.composables.CameraView
 import com.example.wishlist.database.ProductViewModel
 import com.example.wishlist.ui.theme.WishlistTheme
-import com.google.android.gms.location.FusedLocationProviderClient
-import com.google.android.gms.location.LocationServices
 import java.io.File
 import java.util.concurrent.ExecutorService
 import java.util.concurrent.Executors
@@ -36,7 +34,6 @@ class CameraActivity : ComponentActivity() {
     private lateinit var outputDirectory: File
     private lateinit var cameraExecutor: ExecutorService
     private lateinit var photoUri: Uri
-    private lateinit var fusedLocationClient: FusedLocationProviderClient
     private lateinit var productViewModel: ProductViewModel
 
     private var isCamera = mutableStateOf(false)
@@ -53,7 +50,6 @@ class CameraActivity : ComponentActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        fusedLocationClient = LocationServices.getFusedLocationProviderClient(this)
         productViewModel = ViewModelProvider(this)[ProductViewModel::class.java]
 
         setContent {
@@ -131,7 +127,9 @@ class CameraActivity : ComponentActivity() {
                 Card(
                     shape = RoundedCornerShape(16.dp),
                     elevation = 8.dp,
-                    modifier = Modifier.padding(all = 16.dp)
+                    modifier = Modifier
+                        .padding(all = 16.dp)
+                        .aspectRatio(1f)
                 ) {
                     Image(
                         painter = rememberImagePainter(photoUri),
