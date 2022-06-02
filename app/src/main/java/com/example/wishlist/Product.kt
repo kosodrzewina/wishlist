@@ -6,7 +6,7 @@ import androidx.room.PrimaryKey
 import com.google.android.gms.maps.model.LatLng
 
 fun Product.createGeofence(context: Context) {
-    Geofencing.createGeofence(context, LatLng(this.latitude, this.longitude), this.address)
+    Geofencing.createGeofence(context, this)
 }
 
 @Entity

@@ -6,6 +6,7 @@ import androidx.navigation.NavType
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.navArgument
+import androidx.navigation.navDeepLink
 import com.example.wishlist.MainActivity
 import com.example.wishlist.Product
 import com.example.wishlist.ProductStore
@@ -22,6 +23,8 @@ fun NavGraph(
     mainActivity: MainActivity
 ) {
     NavHost(navController = navHostController, startDestination = Screen.HomeScreen.route) {
+        val uri = "https://example.com"
+
         composable(route = Screen.HomeScreen.route) {
             HomeScreen(
                 products = ProductStore.products,
@@ -37,7 +40,10 @@ fun NavGraph(
                     type = NavType.StringType
                     nullable = false
                 }
-            )
+            ),
+            deepLinks = listOf(navDeepLink {
+                uriPattern = "$uri/encodedProductId={encodedProductId}"
+            })
         ) { entry ->
             val decodedProductId = URLDecoder.decode(
                 entry.arguments?.getString("encodedProductId"),

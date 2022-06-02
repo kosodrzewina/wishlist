@@ -14,18 +14,17 @@ import com.example.wishlist.services.LocationService
 import com.google.android.gms.location.Geofence
 import com.google.android.gms.location.GeofencingRequest
 import com.google.android.gms.location.LocationServices
-import com.google.android.gms.maps.model.LatLng
 
 private const val REQUEST_CODE = 2
 private const val TAG = "Geofencing"
 
 object Geofencing {
     @SuppressLint("MissingPermission")
-    fun createGeofence(context: Context, latLng: LatLng, address: String) {
+    fun createGeofence(context: Context, product: Product) {
         val geofence = Geofence
             .Builder()
-            .setCircularRegion(latLng.latitude, latLng.longitude, 200f)
-            .setRequestId("location")
+            .setCircularRegion(product.latitude, product.longitude, 200f)
+            .setRequestId(product.productIdImagePath)
             .setTransitionTypes(Geofence.GEOFENCE_TRANSITION_ENTER)
             .setExpirationDuration(Geofence.NEVER_EXPIRE)
             .build()
@@ -52,7 +51,7 @@ object Geofencing {
                 .addGeofences(request, makePendingIntent(context))
                 .addOnFailureListener { Log.d(TAG, it.toString()) }
                 .addOnSuccessListener {
-                    Log.d(TAG, "Geofence for $address successfully added")
+                    Log.d(TAG, "Geofence for ${product.name} successfully added")
                 }
         }
     }
