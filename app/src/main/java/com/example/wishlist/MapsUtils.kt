@@ -14,9 +14,7 @@ import com.google.android.gms.maps.MapView
 fun rememberMapViewWithLifecycle(): MapView {
     val context = LocalContext.current
     val mapView = remember {
-        MapView(context).apply {
-            id = R.id.map
-        }
+        MapView(context)
     }
 
     val lifecycleObserver = rememberMapLifecycleObserver(mapView)

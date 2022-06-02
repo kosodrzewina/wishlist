@@ -15,14 +15,17 @@ class MapViewModel : ViewModel() {
 
     private fun getInitialLocation(): Location {
         val initialLocation = Location("")
+
         initialLocation.latitude = 52.2297
         initialLocation.longitude = 21.0122
+
         return initialLocation
     }
 
     fun updateLocation(latitude: Double, longitude: Double) {
         if (latitude != location.value.latitude) {
             val location = Location("")
+
             location.latitude = latitude
             location.longitude = longitude
             setLocation(location)
@@ -36,7 +39,7 @@ class MapViewModel : ViewModel() {
     fun getAddressFromLocation(context: Context): String {
         val geocoder = Geocoder(context, Locale.getDefault())
         var addresses: List<Address>? = null
-        var addressText = ""
+        val addressText: String
 
         try {
             addresses =
@@ -47,7 +50,7 @@ class MapViewModel : ViewModel() {
 
         val address: Address? = addresses?.get(0)
 
-        addressText = address?.getAddressLine(0) ?: ""
+        addressText = address?.getAddressLine(0) ?: "Address not found"
 
         return addressText
     }

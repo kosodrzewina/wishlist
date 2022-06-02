@@ -102,6 +102,7 @@ private fun MapViewContainer(
             it.moveCamera(CameraUpdateFactory.newLatLngZoom(position, 15f))
             it.setOnCameraIdleListener {
                 val cameraPosition = it.cameraPosition
+
                 viewModel.updateLocation(
                     cameraPosition.target.latitude,
                     cameraPosition.target.longitude
