@@ -76,6 +76,7 @@ fun CameraView(
                 Icon(
                     imageVector = Icons.Sharp.Lens,
                     contentDescription = null,
+                    tint = Color.White,
                     modifier = Modifier
                         .size(size = 50.dp)
                         .padding(all = 1.dp)
